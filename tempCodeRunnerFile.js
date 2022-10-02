@@ -1,0 +1,1 @@
+let alph = new Array();
