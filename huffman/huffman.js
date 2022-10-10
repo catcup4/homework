@@ -1,4 +1,4 @@
-let str = process.argv[2]
+let str = process.argv[2];
 
 function Node(letter, freq, used, father, code) {
     this.letter = letter;
@@ -22,7 +22,7 @@ for (i in alph) {
     let newNode = new Node(i, alph[i], 0, null, '0');
     tree.push(newNode);
 } 
-//console.log(tree);
+console.log(tree);
 
 treeLength = tree.length;
 for (let i = 0; i < treeLength - 1; i++) {
@@ -50,7 +50,7 @@ for (let i = 0; i < treeLength - 1; i++) {
         let newNode = new Node(tree[mi2].letter + tree[mi1].letter, tree[mi1].freq + tree[mi2].freq, 0, null, '');
         tree.push(newNode);
 }
-//console.log(tree); 
+console.log(tree); 
 
 for (let i = tree.length - 2; i > -1; i--) {
     tree[i].code = tree[tree[i].father].code + tree[i].code;
@@ -58,7 +58,7 @@ for (let i = tree.length - 2; i > -1; i--) {
 for (let i = 0; i < treeLength; i++) {
     console.log(tree[i].letter + " - " + tree[i].code)
 }
-//console.log(tree);
+console.log(tree);
 
 let codedStr = '';
 for (let i = 0; i < str.length; i++) {

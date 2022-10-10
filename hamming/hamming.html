@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hamming code</title>
+		<script>
+			function code() { 
+				let message = document.getElementById('inputData').value;
+				let inputDigits = message.split('')
+				
+				for (let i = 0; i < inputDigits.length; i++){
+					inputDigits[i] *= 1 ;
+				}
+	
+				inputDigits.push( (inputDigits[0] + inputDigits[1]+ inputDigits[3])%2);
+				inputDigits.push((inputDigits[1] + inputDigits[2] + inputDigits[3])%2 );
+				inputDigits.push((inputDigits[0] + inputDigits[2] + inputDigits[3])%2 );
+				document.getElementById('codeData').value = inputDigits.join('');
+
+			}
+			function decode(){
+				let message = document.getElementById('codeData').value;
+				let inputDigits = message.split('');
+				
+				for (let i = 0; i < inputDigits.length; i++){
+					inputDigits[i] *= 1 ;
+				}
+				let cir1 = (inputDigits[0] + inputDigits[1]+ inputDigits[3] + inputDigits[4])%2;
+				let cir2 = (inputDigits[1] + inputDigits[2]+ inputDigits[3] + inputDigits[5])%2;
+				let cir3 = (inputDigits[0] + inputDigits[2]+ inputDigits[3] + inputDigits[6])%2;
+				
+				let sumErr = cir1 + cir2 + cir3;
+				let errorBite = -1;
+				if (sumErr == 1) {
+					errorBite = cir1 == 1 ? 4 : 
+								cir2 == 1 ? 5 :
+								cir3 == 1 ? 6 : errorBite
+				} else if (sumErr == 2) {
+					errorBite = (cir1+cir2) == 2 ? 1 :
+								(cir2+cir3) == 2 ? 2 :
+								(cir3+cir1) == 2 ? 0 : errorBite
+				} else if (sumErr == 3) {
+					errorBite = 3;
+				}
+
+				let errorMessage = errorBite != -1 ? "Error in " + (errorBite+1) + " bite" : "Everything is good";
+				inputDigits[errorBite] = inputDigits[errorBite] == 0 ? 1 : 0;
+
+				document.getElementById('decodedData').value = inputDigits.join('');
+				document.getElementById('errorMessage').textContent = errorMessage;
+			}
+
+
+		</script>
+	</head>
+	<body>
+		<h1>my Hamming code!!!</h1>
+		<p> <input type='text' id='inputData' maxlength="4" /> input data </p>
+		<p> <input type='button' onclick='code()' value='Code'/> </p>
+		<p> <input type='text' id='codeData' maxlength="7"/> coded data </p>
+		<p> <input type='button' onclick='decode()' value='Decode'/> </p>
+		<p> <input type='text' id='decodedData' /> decoded data </p>
+		<p id="errorMessage"></p>
+
+
+
+	</body>
+
+
+
+
+</html>
+
+
