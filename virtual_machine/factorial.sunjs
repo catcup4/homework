@@ -1,0 +1,12 @@
+input 300 0
+input 301 1 
+input 302 100
+input 303 1
+point 304     //start
+mul 302 303 303
+sub 302 301 302
+endpoint
+jb> 302 300 304
+output 303
+exit
+
