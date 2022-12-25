@@ -1,26 +1,15 @@
-input 500 0
-input 510 170
-input 511 107
-point 600 
-mod 510 511 511
-endpoint
-point 601
-mod 510 511 510
-endpoint
-point 602
-output 511
-exit
-endpoint
-point 603
-output 510 
-exit
-endpoint
-je= 510 500 602
-je= 511 500 603 
-jb> 511 510 600
-je= 511 510 600 
-jl< 511 510 601 
-exit
+input 100
+input 101
+cmp 100 101 102
+jz 102 30
+cmpm 100 101 103
+jnz 103 24
+sub 100 101 100
+jmp 4
+sub 101 100 101
+jmp 4
+print 100
+exits
 
 
 
